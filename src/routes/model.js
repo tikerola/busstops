@@ -93,16 +93,16 @@ class WeightedGraph {
             this.adjacensyList[vertex] = []
     }
 
-    addEdge(vertex1, vertex2, weight) {
-        this.adjacensyList[vertex1].push({ node: vertex2, weight })
-        //this.adjacensyList[vertex2].push({ node: vertex1, weight })
+    addEdge(vertex1, vertex2, weight, color) {
+        this.adjacensyList[vertex1].push({ node: vertex2, weight, color })
     }
 
     shortestPath(start, finish) {
         const distances = {}
         const previous = {}
         let smallest
-        const path = []
+        let path = []
+        let pathWithColor = []
 
         for (const vertex in this.adjacensyList) {
 
@@ -119,9 +119,6 @@ class WeightedGraph {
         }
 
         
-        
-        console.log(this.adjacensyList)
-
         while(this.queue.length() > 0) {
             smallest = this.queue.dequeue().val
            
@@ -131,7 +128,12 @@ class WeightedGraph {
                     path.unshift(vertex)
                     vertex = previous[vertex]
                 }
-                return { path, distance: distances[finish] }
+
+                for(let i = 0; i < path.length; i++) {
+                    pathWithColor.push({ vertex: path[i], color: this.getEdgeColor(path[i], path[i + 1])})
+                }
+
+                return { pathWithColor, distance: distances[finish] }
             }
                 
 
@@ -150,17 +152,68 @@ class WeightedGraph {
 
         return null
     }
+
+    getEdgeColor(v1, v2) {
+        for(const vertex of this.adjacensyList[v1]) {
+            if (vertex.node === v2)
+                return vertex.color
+        }
+
+        return undefined
+    }
 }
 
 const graph = new WeightedGraph()
+
+
 
 for (const stop of data.pysakit) {
     graph.addVertex(stop)
 }
 
-for (const road of data.tiet) {
-    graph.addEdge(road.mista, road.mihin, road.kesto)
+
+const helperObj = {}
+
+for (const road of data.tiet) { 
+    helperObj[`${road.mista}${road.mihin}`] = road.kesto
+    helperObj[`${road.mihin}${road.mista}`] = road.kesto
 }
+
+// Alustetaan keltaiset
+let keltainen
+for (let i = 0; i < data.linjastot.keltainen.length - 1; i++) {
+    keltainen = data.linjastot.keltainen
+    graph.addEdge(keltainen[i], keltainen[i + 1], helperObj[`${keltainen[i]}${keltainen[i + 1]}`], 'keltainen')
+}
+let punainen
+for (let i = 0; i < data.linjastot.punainen.length - 1; i++) {
+    punainen = data.linjastot.punainen
+    graph.addEdge(punainen[i], punainen[i + 1], helperObj[`${punainen[i]}${punainen[i + 1]}`], 'punainen')
+}
+let vihreä
+for (let i = 0; i < data.linjastot.vihreä.length - 1; i++) {
+    vihreä = data.linjastot.vihreä
+    graph.addEdge(vihreä[i], vihreä[i + 1], helperObj[`${vihreä[i]}${vihreä[i + 1]}`], 'vihreä')
+}
+let sininen
+for (let i = 0; i < data.linjastot.sininen.length - 1; i++) {
+    sininen = data.linjastot.sininen
+    graph.addEdge(sininen[i], sininen[i + 1], helperObj[`${sininen[i]}${sininen[i + 1]}`], 'sininen')
+}
+
+
+
+
+
+// console.log(helperObj, 'piii')
+
+// for (const road of data.tiet) {
+    
+
+//     graph.addEdge(road.mista, road.mihin, road.kesto)
+// }
+
+
 
 
 
