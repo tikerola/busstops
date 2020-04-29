@@ -1,13 +1,14 @@
 import React from 'react';
 import graph from './routes/model'
+import Canvas from './canvas/Canvas'
 
-const distance = graph.shortestPath('B', 'D')
+const distance = graph.shortestPath('C', 'P')
 
 function App() {
   console.log(distance)
   return (
     <div>
-      hello
+      <Canvas path={distance.pathWithColor} />
     </div>
   );
 }

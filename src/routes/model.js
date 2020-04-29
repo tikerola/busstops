@@ -130,7 +130,7 @@ class WeightedGraph {
                 }
 
                 for(let i = 0; i < path.length; i++) {
-                    pathWithColor.push({ vertex: path[i], color: this.getEdgeColor(path[i], path[i + 1])})
+                    pathWithColor.push({ vertex: path[i], color: this.getEdgeColor(path[i], path[i + 1], i > 0 ? path[i - 1] : undefined)})
                 }
 
                 return { pathWithColor, distance: distances[finish] }
@@ -153,7 +153,8 @@ class WeightedGraph {
         return null
     }
 
-    getEdgeColor(v1, v2) {
+    getEdgeColor(v1, v2, prev) {
+        console.log(this.adjacensyList[v1], 'pöööö', v1)
         for(const vertex of this.adjacensyList[v1]) {
             if (vertex.node === v2)
                 return vertex.color
@@ -183,25 +184,26 @@ for (const road of data.tiet) {
 let keltainen
 for (let i = 0; i < data.linjastot.keltainen.length - 1; i++) {
     keltainen = data.linjastot.keltainen
-    graph.addEdge(keltainen[i], keltainen[i + 1], helperObj[`${keltainen[i]}${keltainen[i + 1]}`], 'keltainen')
+    graph.addEdge(keltainen[i], keltainen[i + 1], helperObj[`${keltainen[i]}${keltainen[i + 1]}`], 'yellow')
 }
 let punainen
 for (let i = 0; i < data.linjastot.punainen.length - 1; i++) {
     punainen = data.linjastot.punainen
-    graph.addEdge(punainen[i], punainen[i + 1], helperObj[`${punainen[i]}${punainen[i + 1]}`], 'punainen')
+    graph.addEdge(punainen[i], punainen[i + 1], helperObj[`${punainen[i]}${punainen[i + 1]}`], 'red')
 }
 let vihreä
 for (let i = 0; i < data.linjastot.vihreä.length - 1; i++) {
     vihreä = data.linjastot.vihreä
-    graph.addEdge(vihreä[i], vihreä[i + 1], helperObj[`${vihreä[i]}${vihreä[i + 1]}`], 'vihreä')
+    graph.addEdge(vihreä[i], vihreä[i + 1], helperObj[`${vihreä[i]}${vihreä[i + 1]}`], 'green')
 }
 let sininen
 for (let i = 0; i < data.linjastot.sininen.length - 1; i++) {
     sininen = data.linjastot.sininen
-    graph.addEdge(sininen[i], sininen[i + 1], helperObj[`${sininen[i]}${sininen[i + 1]}`], 'sininen')
+    graph.addEdge(sininen[i], sininen[i + 1], helperObj[`${sininen[i]}${sininen[i + 1]}`], 'blue')
 }
 
 
+console.log(graph.adjacensyList)
 
 
 
