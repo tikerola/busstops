@@ -16,7 +16,7 @@ class Canvas extends React.Component {
         const ctx = canvas.getContext("2d")
         const img = new Image()
         this.imageRef.current = img
-        img.src = './assets/images/kartta070.png'
+        img.src = './assets/images/kartta070musta.png'
 
         img.onload = () => {
             ctx.drawImage(img, 0, 0)
@@ -28,19 +28,14 @@ class Canvas extends React.Component {
         const canvas = this.canvasRef.current
         const ctx = canvas.getContext("2d")
 
-        console.log('fuck')
-
         ctx.drawImage(this.imageRef.current, 0, 0)
         for (let i = 0; i < path.length - 1; i++) {
             setTimeout(() => this.drawLine(ctx, path[i].vertex, path[i + 1].vertex, path[i].color), (i + 1) * 500)
         }
-
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('animoidaan', this.props.path)
         this.animate()
-
     }
 
     drawLine = (ctx, v1, v2, color) => {
@@ -71,9 +66,8 @@ class Canvas extends React.Component {
 
     render() {
         return (
-            <div style={{ overflow: 'hidden' }}>
-                <canvas ref={this.canvasRef} width={664} height={633} />
-
+            <div style={{ overflow: 'hidden', borderRadius: '4px', height: '445px' }}>
+                <canvas ref={this.canvasRef} width={500} height={450} />
             </div>
         )
     }

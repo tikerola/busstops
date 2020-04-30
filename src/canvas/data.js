@@ -1,6 +1,9 @@
 
+
+// koordinaattikerroin alkuperäisestä kuvakoosta poikkeaville kuville
 const RELATIVE_SIZE = 0.7
 
+// täysikokoisen kuvan pysäkkien koordinaatit
 const canvasData = {
     'AC':
     {
@@ -24,8 +27,8 @@ const canvasData = {
         end: [156, 281]
     },
     'DE': {
-        start: [206, 309],
-        end: [109, 382]
+        start: [206, 341],
+        end: [109, 413]
     },
     'EF': {
         start: [110, 431],
@@ -36,8 +39,8 @@ const canvasData = {
         end: [234, 488]
     },
     'GH': {
-        start: [246, 507],
-        end: [241, 587]
+        start: [248, 508],
+        end: [242, 588]
     },
     'HI': {
         start: [230, 592],
@@ -80,20 +83,20 @@ const canvasData = {
         end: [573, 118]
     },
     'EM': {
-        start: [110, 418],
+        start: [112, 417],
         end: [616, 222]
     },
     'GK': {
         start: [263, 485],
-        end: [504, 352]
+        end: [665, 347]
     },
     'KL': {
-        start: [530, 333],
-        end: [569, 298]
+        start: [680, 324],
+        end: [679, 280]
     },
     'LM': {
-        start: [590, 273],
-        end: [622, 230]
+        start: [668, 253],
+        end: [642, 227]
     },
     'MN': {
         start: [624, 202],
@@ -102,12 +105,10 @@ const canvasData = {
 }
 
 for (const key in canvasData) {
-    
     canvasData[key].start[0] *= RELATIVE_SIZE
     canvasData[key].start[1] *= RELATIVE_SIZE
     canvasData[key].end[0] *= RELATIVE_SIZE
     canvasData[key].end[1] *= RELATIVE_SIZE
-
 }
 
 export default canvasData
