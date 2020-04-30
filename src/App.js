@@ -1,14 +1,24 @@
 import React from 'react';
-import graph from './routes/model'
 import Canvas from './canvas/Canvas'
+import UI from './ui/UI'
 
-const distance = graph.shortestPath('B', 'J')
+
+
+const styles = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-around'
+}
 
 function App() {
-  console.log(distance)
+  const [data, setData] = React.useState({})
+
+  
   return (
-    <div>
-      <Canvas path={distance.pathWithColor} />
+    <div style={styles}>
+      {console.log(data, 'data')}
+      <UI setData={setData} />
+      <Canvas path={data.pathWithColor} />
     </div>
   );
 }

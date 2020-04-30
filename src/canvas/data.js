@@ -1,3 +1,6 @@
+
+const RELATIVE_SIZE = 0.7
+
 const canvasData = {
     'AC':
     {
@@ -85,7 +88,7 @@ const canvasData = {
         end: [504, 352]
     },
     'KL': {
-        start: [529, 334],
+        start: [530, 333],
         end: [569, 298]
     },
     'LM': {
@@ -96,6 +99,14 @@ const canvasData = {
         start: [624, 202],
         end: [595, 135]
     }
+}
+
+for (const key in canvasData) {
+    
+    canvasData[key].start[0] *= RELATIVE_SIZE
+    canvasData[key].start[1] *= RELATIVE_SIZE
+    canvasData[key].end[0] *= RELATIVE_SIZE
+    canvasData[key].end[1] *= RELATIVE_SIZE
 
 }
 

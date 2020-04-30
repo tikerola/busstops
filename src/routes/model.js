@@ -210,20 +210,4 @@ for (let i = 0; i < data.linjastot.sininen.length - 1; i++) {
 }
 
 
-console.log(graph.adjacensyList)
-
-
-
-// console.log(helperObj, 'piii')
-
-// for (const road of data.tiet) {
-    
-
-//     graph.addEdge(road.mista, road.mihin, road.kesto)
-// }
-
-
-
-
-
 export default graph
