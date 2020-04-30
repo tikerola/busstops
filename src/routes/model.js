@@ -129,8 +129,12 @@ class WeightedGraph {
                     vertex = previous[vertex]
                 }
 
+                let prevColor = undefined
+                let color = undefined
                 for(let i = 0; i < path.length; i++) {
-                    pathWithColor.push({ vertex: path[i], color: this.getEdgeColor(path[i], path[i + 1], i > 0 ? path[i - 1] : undefined)})
+                    color = this.getEdgeColor(path[i], path[i + 1], prevColor)
+                    pathWithColor.push({ vertex: path[i], color})
+                    prevColor = color
                 }
 
                 return { pathWithColor, distance: distances[finish] }
@@ -153,14 +157,17 @@ class WeightedGraph {
         return null
     }
 
-    getEdgeColor(v1, v2, prev) {
-        console.log(this.adjacensyList[v1], 'pöööö', v1)
+    getEdgeColor(v1, v2, prevColor) {
+        let returnColor = []
         for(const vertex of this.adjacensyList[v1]) {
             if (vertex.node === v2)
-                return vertex.color
+                returnColor.push(vertex.color)
         }
 
-        return undefined
+        if(returnColor.includes(prevColor))
+            return prevColor
+
+        return returnColor[0]
     }
 }
 

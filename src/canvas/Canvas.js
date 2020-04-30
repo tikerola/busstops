@@ -45,7 +45,7 @@ class Canvas extends React.Component {
     render() {
         return (
             <div style={{ overflow: 'hidden' }}>
-                <canvas ref={this.canvasRef} width={640} height={600} />
+                <canvas ref={this.canvasRef} width={664} height={633} />
 
             </div>
         )
