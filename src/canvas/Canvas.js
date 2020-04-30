@@ -13,14 +13,28 @@ class Canvas extends React.Component {
         ctx.lineWidth=3
         ctx.strokeStyle=color
         const index = `${v1}${v2}`
+        let animCounter = 500
         
-        const deltaX = canvasData[index].end[0] - canvasData[index].start[0]
-        const deltaY = canvasData[index].end[1] - canvasData[index].start[1]
+        const deltaX = (canvasData[index].end[0] - canvasData[index].start[0]) / animCounter
+        const deltaY = (canvasData[index].end[1] - canvasData[index].start[1]) / animCounter
 
-        ctx.moveTo(canvasData[index].start[0], canvasData[index].start[1]);
-        ctx.lineTo(canvasData[index].end[0], canvasData[index].end[1]);
-        ctx.stroke();
+        let prevStartX = canvasData[index].start[0]
+        let prevStartY = canvasData[index].start[1]
+
+        while(animCounter--) {
+            // eslint-disable-next-line no-loop-func
+            setTimeout(() => {
+                ctx.moveTo(prevStartX, prevStartY);
+                ctx.lineTo(prevStartX + deltaX, prevStartY + deltaY);
+                ctx.stroke();
+                prevStartX = prevStartX + deltaX
+                prevStartY = prevStartY + deltaY
+            }, 2)
+
+        }
     }
+
+
 
    
 
@@ -37,7 +51,7 @@ class Canvas extends React.Component {
             ctx.drawImage(img, 0, 0)
 
             for(let i = 0; i < path.length - 1; i++) {
-                setTimeout(() => this.drawLine(ctx, path[i].vertex, path[i + 1].vertex, path[i].color), (i + 1) * 1000)
+                setTimeout(() => this.drawLine(ctx, path[i].vertex, path[i + 1].vertex, path[i].color), (i + 1) * 500)
             }
             
         }
