@@ -38,10 +38,17 @@ class Canvas extends React.Component {
         
         await this.animateBus(ctx)
         console.log('tänne päästään')
-        for (let i = 0; i < path.length - 2; i++) {
-            this.drawLine(ctx, path[i].vertex, path[i + 1].vertex, path[i].color)
-        }
-
+        setTimeout(() => {
+            for (let i = 0; i < path.length - 2; i++) {
+                this.drawLine(ctx, path[i].vertex, path[i + 1].vertex, path[i].color)
+            }
+            const x = `${path[path.length - 2].vertex}${path[path.length - 1].vertex}`
+            const y = `${path[path.length - 2].vertex}${path[path.length - 1].vertex}`
+            console.log(x, y)
+            const endpointX = canvasData[x].end[0]
+            const endpointY = canvasData[y].end[1]
+            ctx.drawImage(this.busRef.current, endpointX + BUS_DIMENSIONS_X, endpointY + BUS_DIMENSIONS_Y)
+        }, 500)
     }
 
     componentDidUpdate(prevProps, prevState) {
