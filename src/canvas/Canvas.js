@@ -18,7 +18,7 @@ class Canvas extends React.Component {
 
         const background = new Image()
         this.backgroundImageRef.current = background
-        background.src = './assets/images/kartta070origtrans.png'
+        background.src = './assets/images/kokeilu.png'
 
         const bus = new Image()
         this.busRef.current = bus
@@ -71,7 +71,7 @@ class Canvas extends React.Component {
 
     drawLine(ctx, v1, v2, color) {
         ctx.beginPath();
-        ctx.lineWidth = 2
+        ctx.lineWidth = 4
         ctx.strokeStyle = color
         const index = `${v1}${v2}`
 
@@ -82,7 +82,7 @@ class Canvas extends React.Component {
 
     drawAnimatedLine = (ctx, v1, v2, color) => {
         ctx.beginPath();
-        ctx.lineWidth = 2
+        ctx.lineWidth = 4
         ctx.strokeStyle = color
         const index = `${v1}${v2}`
         let animCounter = 500

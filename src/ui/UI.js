@@ -1,21 +1,56 @@
 import React, { useEffect } from 'react'
 import graph from '../routes/model'
 import { InputLabel, Select, FormControl, Paper, Typography } from '@material-ui/core'
+import { makeStyles, withTheme } from '@material-ui/core/styles'
 import data from '../data/data.json'
 
-const styles = {
+const containerStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    background: '#c7c6d3',
+    background: '#38423d',
     padding: '20px',
     height: '405px',
     width: '250px',
     marginRight: '50px',
-    color: 'black'
+    color: '#999'
 }
 
+// const useStyles = makeStyles({
+
+//     root: {
+//         '& label.Mui-focused': {
+//             color: 'white',
+//         },
+//         '& .MuiInput-underline:after': {
+//             borderBottomColor: 'yellow',
+//         },
+//         '& .MuiOutlinedInput-root': {
+//             '& fieldset': {
+//                 borderColor: 'white',
+//             },
+//             '&:hover fieldset': {
+//                 borderColor: 'white',
+//             },
+//             '&.Mui-focused fieldset': {
+//                 borderColor: 'yellow',
+//             },
+//         },
+//     },
+//     select: {
+//         '&:before': {
+//             borderColor: 'white',
+//         },
+//         '&:after': {
+//             borderColor: 'white',
+//         },
+//     }
+// })
+
+
 const UI = ({ setData }) => {
+
+    //const classes = useStyles()
 
     const [state, setState] = React.useState({
         start: '',
@@ -30,12 +65,12 @@ const UI = ({ setData }) => {
     useEffect(() => {
         if (state.start && state.stop) {
             const data = graph.shortestPath(state.start, state.stop)
-            
+
             setDistance(data.distance)
             setPath(data.pathWithColor)
             setData(data)
             setState({ start: '', stop: '' })
-            
+
         }
     }, [state.start, state.stop, setData])
 
@@ -56,18 +91,19 @@ const UI = ({ setData }) => {
 
 
     return (
-        <Paper style={styles} elevation={8}>
+        <Paper style={containerStyles} elevation={8}>
             <h2>Valitse reitti</h2>
             <FormControl >
                 <InputLabel htmlFor="age-native-simple">Lähtöpysäkki</InputLabel>
                 <Select
                     native
+                    
                     value={state.start}
                     onChange={handleChange}
                     style={{ width: '200px' }}
                     inputProps={{
                         name: 'start',
-                        id: 'age-native-simple',
+                        id: 'age-native-simple'
                     }}
                 >
                     <option aria-label="None" value="" />
@@ -81,6 +117,7 @@ const UI = ({ setData }) => {
                 <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
                 <Select
                     native
+                    
                     value={state.stop}
                     inputRef={distanceRef}
                     onChange={handleChange}
@@ -106,7 +143,7 @@ const UI = ({ setData }) => {
                 }
                 {
                     distance === Infinity && (
-                        <Typography style={{ color: 'red'}}>Linjat eivät valitettavasti vie sinua perille</Typography>
+                        <Typography style={{ color: 'red' }}>Linjat eivät valitettavasti vie sinua perille</Typography>
                     )
                 }
             </div>
@@ -114,4 +151,4 @@ const UI = ({ setData }) => {
     )
 }
 
-export default UI
+export default withTheme(UI)
