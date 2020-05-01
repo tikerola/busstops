@@ -7,7 +7,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    background: '545454',
+    background: '#c7c6d3',
     padding: '20px',
     height: '405px',
     width: '250px',
@@ -30,12 +30,12 @@ const UI = ({ setData }) => {
     useEffect(() => {
         if (state.start && state.stop) {
             const data = graph.shortestPath(state.start, state.stop)
-            console.log(data, 'piip', data.distance === Infinity)
+            
             setDistance(data.distance)
             setPath(data.pathWithColor)
             setData(data)
             setState({ start: '', stop: '' })
-            console.log(distanceRef.current)
+            
         }
     }, [state.start, state.stop, setData])
 
