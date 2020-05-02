@@ -1,5 +1,5 @@
 /* eslint-disable no-loop-func */
-import data from '../data/data.json'
+import data from '../challengeData/data.json'
 
 class Node {
     constructor(val, priority) {

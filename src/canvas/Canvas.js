@@ -1,6 +1,6 @@
 /* eslint-disable no-loop-func */
 import React from 'react'
-import canvasData from './data'
+import canvasData from './canvasData'
 
 const BUS_DIMENSIONS_X = - 20
 const BUS_DIMENSIONS_Y = - 58
@@ -29,6 +29,11 @@ class Canvas extends React.Component {
         }
     }
 
+    componentDidUpdate(prevProps, prevState) {
+        this.animate()
+        this.props.setDrawBusses(false)
+    }
+
     async animate() {
         const { path } = this.props
         const canvas = this.canvasRef.current
@@ -36,8 +41,10 @@ class Canvas extends React.Component {
 
         ctx.drawImage(this.backgroundImageRef.current, 0, 0)
         
+        // Animoidaan 'bussin' eteneminen kartalla
         await this.animateBus(ctx)
         
+        // Lopuksi piirretään kartalle yhtenäinen reittiviiva
         setTimeout(() => {
             for (let i = 0; i < path.length - 2; i++) {
                 this.drawLine(ctx, path[i].vertex, path[i + 1].vertex, path[i].color)
@@ -48,13 +55,10 @@ class Canvas extends React.Component {
             const endpointX = canvasData[x].end[0]
             const endpointY = canvasData[y].end[1]
             ctx.drawImage(this.busRef.current, endpointX + BUS_DIMENSIONS_X, endpointY + BUS_DIMENSIONS_Y)
+            
+            // Piirtämisen jälkeen annetaan UI:lle lupa näyttää reittitiedot väribusseineen
             this.props.setDrawBusses(true)
         }, 500)
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        this.animate()
-        this.props.setDrawBusses(false)
     }
 
     animateBus = (ctx) => {
@@ -108,7 +112,6 @@ class Canvas extends React.Component {
                 prevStartX = prevStartX + deltaX
                 prevStartY = prevStartY + deltaY
             }, 2)
-
         }
     }
 

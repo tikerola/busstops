@@ -11,7 +11,7 @@ const containerStyles = {
     background: '#38423d',
     padding: '20px',
     height: '405px',
-    width: '250px',
+    width: '220px',
     marginRight: '50px',
     color: '#999'
 }
@@ -26,12 +26,13 @@ const UI = ({ setData, drawBusses }) => {
     const [distance, setDistance] = React.useState()
     const [path, setPath] = React.useState()
 
-    let distanceRef = React.useRef()
+    let selectRef1 = React.useRef()
+    let selectRef2 = React.useRef()
 
     useEffect(() => {
         if (state.start && state.stop) {
             const data = graph.shortestPath(state.start, state.stop)
-            console.log(data, 'data')
+
             setDistance(data.distance)
             setPath(data.pathWithColor)
             setData(data)
@@ -41,9 +42,10 @@ const UI = ({ setData, drawBusses }) => {
     }, [state.start, state.stop, setData])
 
     useEffect(() => {
-        if (!state.start && !state.end)
-            distanceRef.current.blur()
-
+        if (!state.start && !state.end) {
+            selectRef1.current.blur()
+            selectRef2.current.blur()
+        }
     }, [state.start, state.end])
 
     const handleChange = (event) => {
@@ -58,13 +60,12 @@ const UI = ({ setData, drawBusses }) => {
 
     return (
         <Paper style={containerStyles} elevation={8}>
-
             <div>
                 <FormControl >
                     <InputLabel htmlFor="age-native-simple">Lähtöpysäkki</InputLabel>
                     <Select
                         native
-
+                        inputRef={selectRef2}
                         value={state.start}
                         onChange={handleChange}
                         style={{ width: '200px' }}
@@ -85,9 +86,8 @@ const UI = ({ setData, drawBusses }) => {
                 <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
                 <Select
                     native
-
                     value={state.stop}
-                    inputRef={distanceRef}
+                    inputRef={selectRef1}
                     onChange={handleChange}
                     style={{ width: '200px' }}
                     inputProps={{
@@ -108,7 +108,7 @@ const UI = ({ setData, drawBusses }) => {
                         {path.map((point, index) => {
                             return <div key={index}>
                                 {point.color && drawBusses && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                                    <span style={{ width: '100px'}}>{point.vertex} - {path[index + 1].vertex}</span>
+                                    <span style={{ width: '100px' }}>{point.vertex} - {path[index + 1].vertex}</span>
                                     <img src={`./assets/images/busicon${point.color}.png`} height="15" alt="busicon" />
                                 </div>
                                 }
