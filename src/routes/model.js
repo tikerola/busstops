@@ -95,6 +95,7 @@ class WeightedGraph {
 
     addEdge(vertex1, vertex2, weight, color) {
         this.adjacensyList[vertex1].push({ node: vertex2, weight, color })
+        this.adjacensyList[vertex2].push({ node: vertex1, weight, color })
     }
 
     shortestPath(start, finish) {

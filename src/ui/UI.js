@@ -65,7 +65,7 @@ const UI = ({ setData }) => {
     useEffect(() => {
         if (state.start && state.stop) {
             const data = graph.shortestPath(state.start, state.stop)
-
+            console.log(data, 'data')
             setDistance(data.distance)
             setPath(data.pathWithColor)
             setData(data)
