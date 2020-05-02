@@ -28,47 +28,80 @@ const styles = {
     justifyContent: 'center',
     padding: '30px',
     width: '80vw',
-
     background: 'radial-gradient(circle, rgba(69,69,71,1) 0%, rgba(3,5,13,1) 91%, rgba(0,0,0,1) 100%)'
+  },
 
+  headerContainer: {
+    width: '55%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   }
 }
 
 const theme = createMuiTheme({
   overrides: {
+    MuiInputBase: {
+      input: {
+        color: '#999'
+      }
+    },
     MuiInput: {
-      underline: {
-        
-        '&.MuiInput-underline:before': {
-          border: 'none',
-          
-        },
 
+      underline: {
+
+        '&.MuiInput-underline:before': {
+          //border: 'none',
+
+        },
         '&.MuiInput-underline:after': {
           border: 'none',
-          
         },
         '&.MuiInput-underline:focus': {
           border: 'none',
-          
         },
-
-
       }
     },
     MuiInputLabel: {
       root: {
         '&.Mui-focused': {
           color: '#999'
-        }
+        },
+        color: '#999'
       },
+    },
+    MuiOutlinedInput: {
+      root: {
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: '#999',
+          },
+          '&:hover fieldset': {
+            borderColor: '#999',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: '#999',
+          },
+        },
+      }
+    },
+    MuiSelect: {
+      select: {
+        '&.MuiSelect-select:not([multiple]) option': {
+          background: '#663826',
+          color: '#ffffff'
+        },
+        '&.MuiSelect-select:option': {
+          background: '#000',
+        },
+      }
     }
-    
+
   },
   palette: {
     primary: {
       light: '#ffffff',
-      main: '#ff4400',
+      main: '#999',
     },
     secondary: {
       light: '#ffffff',
@@ -110,15 +143,21 @@ const theme = createMuiTheme({
 
 function App() {
   const [data, setData] = React.useState({})
+  const [drawBusses, setDrawBusses] = React.useState(false)
+
 
 
   return (
     <ThemeProvider theme={theme}>
       <div style={styles.root}>
-        <h1 style={styles.header}>Köyhän miehen reittiopas</h1>
+        <div style={styles.headerContainer}>
+        <img src='./assets/images/poorman2.png' alt="poorman" height="100" />
+          <h1 style={styles.header}>Köyhän miehen reittiopas</h1>
+          <img src='./assets/images/poorman.png' alt="poorman" height="100" />
+        </div>
         <Paper elevation={4} style={styles.content}>
-          <UI setData={setData} />
-          <Canvas path={data.pathWithColor} />
+          <UI setData={setData} drawBusses={drawBusses} />
+          <Canvas path={data.pathWithColor} setDrawBusses={setDrawBusses} />
         </Paper>
       </div>
     </ThemeProvider>

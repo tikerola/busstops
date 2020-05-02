@@ -1,8 +1,8 @@
+import { FormControl, InputLabel, Paper, Select, Typography } from '@material-ui/core'
+import { withTheme } from '@material-ui/core/styles'
 import React, { useEffect } from 'react'
-import graph from '../routes/model'
-import { InputLabel, Select, FormControl, Paper, Typography } from '@material-ui/core'
-import { makeStyles, withTheme } from '@material-ui/core/styles'
 import data from '../data/data.json'
+import graph from '../routes/model'
 
 const containerStyles = {
     display: 'flex',
@@ -16,41 +16,7 @@ const containerStyles = {
     color: '#999'
 }
 
-// const useStyles = makeStyles({
-
-//     root: {
-//         '& label.Mui-focused': {
-//             color: 'white',
-//         },
-//         '& .MuiInput-underline:after': {
-//             borderBottomColor: 'yellow',
-//         },
-//         '& .MuiOutlinedInput-root': {
-//             '& fieldset': {
-//                 borderColor: 'white',
-//             },
-//             '&:hover fieldset': {
-//                 borderColor: 'white',
-//             },
-//             '&.Mui-focused fieldset': {
-//                 borderColor: 'yellow',
-//             },
-//         },
-//     },
-//     select: {
-//         '&:before': {
-//             borderColor: 'white',
-//         },
-//         '&:after': {
-//             borderColor: 'white',
-//         },
-//     }
-// })
-
-
-const UI = ({ setData }) => {
-
-    //const classes = useStyles()
+const UI = ({ setData, drawBusses }) => {
 
     const [state, setState] = React.useState({
         start: '',
@@ -92,32 +58,34 @@ const UI = ({ setData }) => {
 
     return (
         <Paper style={containerStyles} elevation={8}>
-            <h2>Valitse reitti</h2>
-            <FormControl >
-                <InputLabel htmlFor="age-native-simple">Lähtöpysäkki</InputLabel>
-                <Select
-                    native
-                    
-                    value={state.start}
-                    onChange={handleChange}
-                    style={{ width: '200px' }}
-                    inputProps={{
-                        name: 'start',
-                        id: 'age-native-simple'
-                    }}
-                >
-                    <option aria-label="None" value="" />
-                    {data.pysakit.map(pysakki => (
-                        <option key={pysakki + '1'} value={pysakki}>{pysakki}</option>
-                    ))}
 
-                </Select>
-            </FormControl>
+            <div>
+                <FormControl >
+                    <InputLabel htmlFor="age-native-simple">Lähtöpysäkki</InputLabel>
+                    <Select
+                        native
+
+                        value={state.start}
+                        onChange={handleChange}
+                        style={{ width: '200px' }}
+                        inputProps={{
+                            name: 'start',
+                            id: 'age-native-simple'
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        {data.pysakit.map(pysakki => (
+                            <option key={pysakki + '1'} value={pysakki}>{pysakki}</option>
+                        ))}
+
+                    </Select>
+                </FormControl>
+            </div>
             <FormControl  >
                 <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
                 <Select
                     native
-                    
+
                     value={state.stop}
                     inputRef={distanceRef}
                     onChange={handleChange}
@@ -136,8 +104,17 @@ const UI = ({ setData }) => {
             <div style={{ marginTop: '30px' }}>
                 {distance && distance !== Infinity && (
                     <div>
-                        <Typography>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}</Typography>
-                        <Typography>Lyhin matka: {distance}</Typography>
+                        <Typography style={{ marginBottom: '15px' }}>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}, Lyhin matka: {distance}</Typography>
+                        {path.map((point, index) => {
+                            return <div key={index}>
+                                {point.color && drawBusses && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                                    <span style={{ width: '100px'}}>{point.vertex} - {path[index + 1].vertex}</span>
+                                    <img src={`./assets/images/busicon${point.color}.png`} height="15" alt="busicon" />
+                                </div>
+                                }
+                            </div>
+                        })}
+
                     </div>
                 )
                 }

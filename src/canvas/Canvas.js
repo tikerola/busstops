@@ -3,7 +3,7 @@ import React from 'react'
 import canvasData from './data'
 
 const BUS_DIMENSIONS_X = - 20
-const BUS_DIMENSIONS_Y = - 62
+const BUS_DIMENSIONS_Y = - 58
 
 class Canvas extends React.Component {
 
@@ -22,7 +22,7 @@ class Canvas extends React.Component {
 
         const bus = new Image()
         this.busRef.current = bus
-        bus.src = './assets/images/bus.png'
+        bus.src = './assets/images/bus1.png'
 
         background.onload = () => {
             ctx.drawImage(background, 0, 0)
@@ -48,11 +48,13 @@ class Canvas extends React.Component {
             const endpointX = canvasData[x].end[0]
             const endpointY = canvasData[y].end[1]
             ctx.drawImage(this.busRef.current, endpointX + BUS_DIMENSIONS_X, endpointY + BUS_DIMENSIONS_Y)
+            this.props.setDrawBusses(true)
         }, 500)
     }
 
     componentDidUpdate(prevProps, prevState) {
         this.animate()
+        this.props.setDrawBusses(false)
     }
 
     animateBus = (ctx) => {
@@ -119,4 +121,4 @@ class Canvas extends React.Component {
     }
 }
 
-export default Canvas
+export default React.memo(Canvas)
