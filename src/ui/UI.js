@@ -2,6 +2,7 @@ import { FormControl, InputLabel, Paper, Select, Typography } from '@material-ui
 import { withTheme } from '@material-ui/core/styles'
 import React, { useEffect } from 'react'
 import data from '../challengeData/data.json'
+import { DirectionsBus } from '@material-ui/icons';
 
 const containerStyles = {
     display: 'flex',
@@ -15,23 +16,24 @@ const containerStyles = {
     color: '#999'
 }
 
-const UI = ({ drawBusses, path, distance, stop, setStop }) => {
+const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
 
     let selectRef1 = React.useRef()
     let selectRef2 = React.useRef()
 
+    // Selectien focus pois valinnan jälkeen
     useEffect(() => {
-        if (!stop.start && !stop.stop) {
-                selectRef1.current.blur()
-                selectRef2.current.blur()
+        if (!busStop.start && !busStop.stop) {
+            selectRef1.current.blur()
+            selectRef2.current.blur()
         }
-    }, [stop.start, stop.stop])
+    }, [busStop.start, busStop.stop])
 
 
     const handleChange = (event) => {
 
         const name = event.target.name;
-        setStop(prevState => ({
+        setBusStop(prevState => ({
             ...prevState,
             [name]: event.target.value,
         }));
@@ -40,15 +42,17 @@ const UI = ({ drawBusses, path, distance, stop, setStop }) => {
 
     return (
         <Paper style={containerStyles} elevation={8}>
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+                <DirectionsBus style={{ marginRight: '5px', paddingBottom: '4px' }} />
+
                 <FormControl >
                     <InputLabel htmlFor="lähtöpysäkki">Lähtöpysäkki</InputLabel>
                     <Select
                         native
                         inputRef={selectRef2}
-                        value={stop.start}
+                        value={busStop.start}
                         onChange={handleChange}
-                        style={{ width: '200px' }}
+                        style={{ width: '170px' }}
                         inputProps={{
                             name: 'start',
                             id: 'lähtöpysäkki'
@@ -61,30 +65,35 @@ const UI = ({ drawBusses, path, distance, stop, setStop }) => {
 
                     </Select>
                 </FormControl>
+
             </div>
-            <FormControl  >
-                <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
-                <Select
-                    native
-                    value={stop.stop}
-                    inputRef={selectRef1}
-                    onChange={handleChange}
-                    style={{ width: '200px' }}
-                    inputProps={{
-                        name: 'stop',
-                        id: 'päätepysäkki',
-                    }}
-                >
-                    <option aria-label="None" value="" />
-                    {data.pysakit.map(pysakki => (
-                        <option key={pysakki + '2'} value={pysakki}>{pysakki}</option>
-                    ))}
-                </Select>
-            </FormControl>
-            <div style={{ marginTop: '30px' }}>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
+                <DirectionsBus style={{ marginRight: '5px', paddingBottom: '4px' }} />
+                <FormControl  >
+                    <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
+                    <Select
+                        native
+                        value={busStop.stop}
+                        inputRef={selectRef1}
+                        onChange={handleChange}
+                        style={{ width: '170px' }}
+                        inputProps={{
+                            name: 'stop',
+                            id: 'päätepysäkki',
+                        }}
+                    >
+                        <option aria-label="None" value="" />
+                        {data.pysakit.map(pysakki => (
+                            <option key={pysakki + '2'} value={pysakki}>{pysakki}</option>
+                        ))}
+                    </Select>
+                </FormControl>
+            </div>
+            <Paper elevation={4} style={{ marginTop: '30px', background: '#5c3835', padding: '10px', width: '90%', height: '65%', color: '#999' }}>
+                <Typography style={{ textAlign: 'center', fontSize: '1.0em', textDecoration: 'underline', marginBottom: '10px'}}>Tulokset:</Typography>
                 {distance > 0 && distance !== Infinity && (
                     <div>
-                        <Typography style={{ marginBottom: '15px' }}>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}, Lyhin matka: {distance}</Typography>
+                        <Typography style={{ marginBottom: '15px', textAlign: 'center' }}>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}, Lyhin matka: {distance}</Typography>
                         {path.map((point, index) => {
                             return <div key={index}>
                                 {point.color && drawBusses && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -108,8 +117,8 @@ const UI = ({ drawBusses, path, distance, stop, setStop }) => {
                         <Typography style={{ color: 'red' }}>Linjat eivät valitettavasti vie sinua perille</Typography>
                     )
                 }
-                
-            </div>
+
+            </Paper>
         </Paper>
     )
 }

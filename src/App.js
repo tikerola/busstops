@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Canvas from './canvas/Canvas'
 import UI from './ui/UI'
 import { Paper } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from './ui/theme'
-import graph from './routes/weightedGraph'
+import initGraph from './routes/initGraph'
 
 const styles = {
   root: {
@@ -46,15 +46,21 @@ const styles = {
 function App() {
   const [data, setData] = React.useState({})
   const [drawBusses, setDrawBusses] = React.useState(false)
-  const [stop, setStop] = React.useState({ start: '', stop: '' })
+  const [busStop, setBusStop] = React.useState({ start: '', stop: '' })
+
+  const graph = useRef()
 
   useEffect(() => {
-    if (stop.start && stop.stop) {
-      const data = graph.shortestPath(stop.start, stop.stop)
+    graph.current = initGraph()
+  }, [])
+
+  useEffect(() => {
+    if (busStop.start && busStop.stop) {
+      const data = graph.current.shortestPath(busStop.start, busStop.stop)
 
       setData(data)
     }
-  }, [stop.start, stop.stop])
+  }, [busStop.start, busStop.stop])
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,19 +78,19 @@ function App() {
 
         <Paper elevation={4} style={styles.content}>
           <UI
-            setStop={setStop}
+            setBusStop={setBusStop}
             path={data.pathWithColor}
             drawBusses={drawBusses}
             distance={data.distance}
-            stop={stop}
+            busStop={busStop}
           />
           
           <Canvas
             path={data.pathWithColor}
             setDrawBusses={setDrawBusses}
             setData={setData}
-            setStop={setStop}
-            stop={stop}
+            setBusStop={setBusStop}
+            busStop={busStop}
           />
         </Paper>
 

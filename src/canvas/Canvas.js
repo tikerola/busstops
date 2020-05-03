@@ -34,13 +34,13 @@ class Canvas extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
     
-        if (this.props.path !== prevProps.path && this.props.stop.start && this.props.stop.stop) {
+        if (this.props.path !== prevProps.path && this.props.busStop.start && this.props.busStop.stop) {
             
             this.animate()
             this.props.setDrawBusses(false)
 
             setTimeout(() => {
-                this.props.setStop({ start: '', stop: '' })
+                this.props.setBusStop({ start: '', stop: '' })
             }, 2000)
         }
     }
@@ -134,11 +134,11 @@ class Canvas extends React.Component {
 
         const letter = isBusStopPressed(x, y)
         if (letter) {
-            if (!this.props.stop.start) {
-                this.props.setStop({ start: letter, stop: '' })
+            if (!this.props.busStop.start) {
+                this.props.setBusStop({ start: letter, stop: '' })
             }
-            else if (!this.props.stop.stop) {
-                this.props.setStop(prevState => ({ ...prevState, stop: letter }))
+            else if (!this.props.busStop.stop) {
+                this.props.setBusStop(prevState => ({ ...prevState, stop: letter }))
             }
         }
     }

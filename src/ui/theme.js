@@ -9,10 +9,8 @@ export default createMuiTheme({
       },
       MuiInput: {
         underline: {
-  
           '&.MuiInput-underline:before': {
             //border: 'none',
-  
           },
           '&.MuiInput-underline:after': {
             border: 'none',
@@ -93,12 +91,10 @@ export default createMuiTheme({
         main: '#999',
         dark: '#999'
       },
-  
       contrastThreshold: 3,
       tonalOffset: 0.2,
     },
     typography: {
-      htmlFontSize: '20'
+      htmlFontSize: 20
     }
-  
   });
