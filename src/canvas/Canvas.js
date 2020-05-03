@@ -7,6 +7,15 @@ import isBusStopPressed from './isBusStopPressed'
 const BUS_DIMENSIONS_X = - 20
 const BUS_DIMENSIONS_Y = - 55
 
+const styles = {
+    canvas: {
+        overflow: 'hidden',
+        borderRadius: '4px',
+        height: '445px',
+        cursor: 'pointer'
+    }
+}
+
 class Canvas extends React.Component {
 
     canvasRef = React.createRef()
@@ -33,9 +42,9 @@ class Canvas extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-    
+
         if (this.props.path !== prevProps.path && this.props.busStop.start && this.props.busStop.stop) {
-            
+
             this.animate()
             this.props.setDrawBusses(false)
 
@@ -69,7 +78,7 @@ class Canvas extends React.Component {
 
             // Piirtämisen jälkeen annetaan UI:lle lupa näyttää reittitiedot väribusseineen
             this.props.setDrawBusses(true)
-            
+
         }, 500)
     }
 
@@ -145,11 +154,11 @@ class Canvas extends React.Component {
 
     render() {
         return (
-            <div style={{ overflow: 'hidden', borderRadius: '4px', height: '445px', cursor: 'pointer' }}>
-                <canvas 
-                ref={this.canvasRef} 
-                width={500} height={450} 
-                onMouseDown={this.handleMouseDown}
+            <div style={styles.canvas}>
+                <canvas
+                    ref={this.canvasRef}
+                    width={500} height={450}
+                    onMouseDown={this.handleMouseDown}
                 />
             </div>
         )

@@ -7,7 +7,7 @@ import theme from './ui/theme'
 import initGraph from './routes/initGraph'
 
 const styles = {
-  root: {
+  container: {
     height: '100vh',
     display: 'flex',
     flexDirection: 'column',
@@ -17,13 +17,11 @@ const styles = {
     background: 'black'
   },
 
-  content: {
+  headerAndSubheaderContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: '30px',
-    width: '80vw',
-    background: 'radial-gradient(circle, rgba(69,69,71,1) 0%, rgba(3,5,13,1) 91%, rgba(0,0,0,1) 100%)'
+    flexDirection: 'column',
+    alignItems: 'center',
+    width: '100%'
   },
 
   headerContainer: {
@@ -40,6 +38,15 @@ const styles = {
     letterSpacing: '0.1em',
     fontFamily: 'Bigelow Rules, cursive',
     marginBottom: 0
+  },
+
+  content: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: '30px',
+    width: '80vw',
+    background: 'radial-gradient(circle, rgba(69,69,71,1) 0%, rgba(3,5,13,1) 91%, rgba(0,0,0,1) 100%)'
   }
 }
 
@@ -64,16 +71,16 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={styles.root}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
-        <div style={styles.headerContainer}>
-          <img src='./assets/images/poorman2.png' alt="poorman" height="80" />
-          <h1 style={styles.header}>Köyhän miehen reittiopas</h1>
-          <img src='./assets/images/poorman.png' alt="poorman" height="80" style={{ display: 'flex', alignSelf: 'bottom'}} />
-        </div>
-        <div style={{ color: '#777', fontSize: '0.8em', position: 'relative', top: '-10px'}}>
-        Valitse pysäkit valikosta tai kartalta
-        </div>
+      <div style={styles.container}>
+        <div style={styles.headerAndSubheaderContainer}>
+          <div style={styles.headerContainer}>
+            <img src='./assets/images/poorman2.png' alt="poorman" height="80" />
+            <h1 style={styles.header}>Köyhän miehen reittiopas</h1>
+            <img src='./assets/images/poorman.png' alt="poorman" height="80" />
+          </div>
+          <div style={{ color: '#777', fontSize: '0.8em', position: 'relative', top: '-10px' }}>
+            Valitse pysäkit valikosta tai kartalta
+          </div>
         </div>
 
         <Paper elevation={4} style={styles.content}>
@@ -84,7 +91,7 @@ function App() {
             distance={data.distance}
             busStop={busStop}
           />
-          
+
           <Canvas
             path={data.pathWithColor}
             setDrawBusses={setDrawBusses}

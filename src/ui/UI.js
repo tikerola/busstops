@@ -4,16 +4,56 @@ import React, { useEffect } from 'react'
 import data from '../challengeData/data.json'
 import { DirectionsBus } from '@material-ui/icons';
 
-const containerStyles = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    background: '#38423d',
-    padding: '20px',
-    height: '405px',
-    width: '220px',
-    marginRight: '50px',
-    color: '#999'
+const styles = {
+    container: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        background: '#38423d',
+        padding: '20px',
+        height: '405px',
+        width: '220px',
+        marginRight: '50px',
+        color: '#999'
+    },
+    selectContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-end'
+    },
+    select: {
+        width: '170px'
+    },
+    busIcon: {
+        marginRight: '5px',
+        paddingBottom: '4px'
+    },
+    resultContainer: {
+        marginTop: '30px',
+        background: '#5c3835',
+        padding: '10px',
+        width: '90%',
+        height: '65%',
+        color: '#999'
+    },
+    resultTitle: {
+        textAlign: 'center',
+        fontSize: '1.0em',
+        textDecoration: 'underline',
+        marginBottom: '10px'
+    },
+    resultRoute: {
+        marginBottom: '15px',
+        textAlign: 'center'
+    },
+    resultRouteList: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-around'
+    },
+    resultVertex: {
+        width: '100px'
+    }
 }
 
 const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
@@ -41,9 +81,9 @@ const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
 
 
     return (
-        <Paper style={containerStyles} elevation={8}>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
-                <DirectionsBus style={{ marginRight: '5px', paddingBottom: '4px' }} />
+        <Paper style={styles.container} elevation={8}>
+            <div style={styles.selectContainer}>
+                <DirectionsBus style={styles.busIcon} />
 
                 <FormControl >
                     <InputLabel htmlFor="lähtöpysäkki">Lähtöpysäkki</InputLabel>
@@ -52,7 +92,7 @@ const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
                         inputRef={selectRef2}
                         value={busStop.start}
                         onChange={handleChange}
-                        style={{ width: '170px' }}
+                        style={styles.select}
                         inputProps={{
                             name: 'start',
                             id: 'lähtöpysäkki'
@@ -67,8 +107,8 @@ const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
                 </FormControl>
 
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-end' }}>
-                <DirectionsBus style={{ marginRight: '5px', paddingBottom: '4px' }} />
+            <div style={styles.selectContainer}>
+                <DirectionsBus style={styles.busIcon} />
                 <FormControl  >
                     <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
                     <Select
@@ -76,7 +116,7 @@ const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
                         value={busStop.stop}
                         inputRef={selectRef1}
                         onChange={handleChange}
-                        style={{ width: '170px' }}
+                        style={styles.select}
                         inputProps={{
                             name: 'stop',
                             id: 'päätepysäkki',
@@ -89,15 +129,15 @@ const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
                     </Select>
                 </FormControl>
             </div>
-            <Paper elevation={4} style={{ marginTop: '30px', background: '#5c3835', padding: '10px', width: '90%', height: '65%', color: '#999' }}>
-                <Typography style={{ textAlign: 'center', fontSize: '1.0em', textDecoration: 'underline', marginBottom: '10px'}}>Tulokset:</Typography>
+            <Paper elevation={4} style={styles.resultContainer}>
+                <Typography style={styles.resultTitle}>Tulokset:</Typography>
                 {distance > 0 && distance !== Infinity && (
                     <div>
-                        <Typography style={{ marginBottom: '15px', textAlign: 'center' }}>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}, Lyhin matka: {distance}</Typography>
+                        <Typography style={styles.resultRoute}>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}, Lyhin matka: {distance}</Typography>
                         {path.map((point, index) => {
                             return <div key={index}>
-                                {point.color && drawBusses && <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                                    <span style={{ width: '100px' }}>{point.vertex} - {path[index + 1].vertex}</span>
+                                {point.color && drawBusses && <div style={styles.resultRouteList}>
+                                    <span style={styles.resultVertex}>{point.vertex} - {path[index + 1].vertex}</span>
                                     <img src={`./assets/images/busicon${point.color}.png`} height="15" alt="busicon" />
                                 </div>
                                 }
