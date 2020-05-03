@@ -3,7 +3,84 @@
 // koordinaattikerroin alkuperäisestä kuvakoosta poikkeaville kuville
 const RELATIVE_SIZE = 0.7
 
-// täysikokoisen kuvan pysäkkien koordinaatit
+export const stops = {
+    'A':
+    {
+        point: [97, 198]
+    },
+    'B':
+    {
+        point: [206, 175]
+    },
+    'C':
+    {
+        point: [23, 233]
+    },
+    'D':
+    {
+        point: [153, 231]
+    },
+    //
+    'E':
+    {
+        point: [67, 297]
+    },
+    'F':
+    {
+        point: [116, 324]
+    },
+    'G':
+    {
+        point: [173, 345]
+    },
+    'H':
+    {
+        point: [168, 423]
+    },
+    'I':
+    {
+        point: [113, 361]
+    },
+    'J':
+    {
+        point: [56, 329]
+    },
+    'K':
+    {
+        point: [476, 239]
+    },
+    'L':
+    {
+        point: [476, 185]
+    },
+    'M':
+    {
+        point: [442, 151]
+    },
+    'N':
+    {
+        point: [413, 84]
+    },
+    'O':
+    {
+        point: [350, 21]
+    },
+    'P':
+    {
+        point: [255, 60]
+    },
+    'Q':
+    {
+        point: [342, 72]
+    },
+    'R':
+    {
+        point: [379, 159]
+    }
+   
+}
+
+// pysäkkien välisten teiden koordinaatit
 const canvasData = {
     'AC':
     {

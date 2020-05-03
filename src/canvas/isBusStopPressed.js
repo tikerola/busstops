@@ -1,4 +1,4 @@
-import vertices from './dummy'
+import {stops as vertices} from './canvasData'
 
 const RADIUS = 10
 
