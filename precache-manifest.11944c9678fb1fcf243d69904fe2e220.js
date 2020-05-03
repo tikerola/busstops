@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "269286ccb2afd20f26c5c9314c12a0ed",
+    "revision": "c45f17e5788df37ffc5e0c0b77bb7c4b",
     "url": "/busstops/index.html"
   },
   {
-    "revision": "9606c291e7ca06314f4e",
+    "revision": "461c3aae84e426e95bac",
     "url": "/busstops/static/css/main.6e9c617a.chunk.css"
   },
   {
-    "revision": "10b50baac06b136b1f66",
-    "url": "/busstops/static/js/2.406ee924.chunk.js"
+    "revision": "8eb1fb6dd51167a33b7c",
+    "url": "/busstops/static/js/2.de5caefb.chunk.js"
   },
   {
     "revision": "0749163b59fbee32225059cb60c18af6",
-    "url": "/busstops/static/js/2.406ee924.chunk.js.LICENSE.txt"
+    "url": "/busstops/static/js/2.de5caefb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9606c291e7ca06314f4e",
-    "url": "/busstops/static/js/main.10e37577.chunk.js"
+    "revision": "461c3aae84e426e95bac",
+    "url": "/busstops/static/js/main.1ec00935.chunk.js"
   },
   {
     "revision": "c758ab843591c7a2b33f",
