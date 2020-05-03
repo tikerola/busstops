@@ -6,24 +6,24 @@ const RELATIVE_SIZE = 0.7
 export const stops = {
     'A':
     {
-        point: [97, 198]
+        point: [99, 199]
     },
     'B':
     {
-        point: [206, 175]
+        point: [208, 174]
     },
     'C':
     {
-        point: [23, 233]
+        point: [25, 232]
     },
     'D':
     {
-        point: [153, 231]
+        point: [154, 231]
     },
     //
     'E':
     {
-        point: [67, 297]
+        point: [69, 297]
     },
     'F':
     {
@@ -31,47 +31,47 @@ export const stops = {
     },
     'G':
     {
-        point: [173, 345]
+        point: [176, 345]
     },
     'H':
     {
-        point: [168, 423]
+        point: [169, 423]
     },
     'I':
     {
-        point: [113, 361]
+        point: [114, 361]
     },
     'J':
     {
-        point: [56, 329]
+        point: [57, 329]
     },
     'K':
     {
-        point: [476, 239]
+        point: [477, 238]
     },
     'L':
     {
-        point: [476, 185]
+        point: [477, 185]
     },
     'M':
     {
-        point: [442, 151]
+        point: [444, 151]
     },
     'N':
     {
-        point: [413, 84]
+        point: [414, 84]
     },
     'O':
     {
-        point: [350, 21]
+        point: [352, 20]
     },
     'P':
     {
-        point: [255, 60]
+        point: [256, 59]
     },
     'Q':
     {
-        point: [342, 72]
+        point: [344, 72]
     },
     'R':
     {

@@ -149,7 +149,7 @@ const UI = ({ drawBusses, path, distance, busStop, setBusStop }) => {
                 }
                 {
                     distance === 0 && (
-                        <Typography>Tähän et tarvitse bussia!</Typography>
+                        <Typography style={ styles.resultRoute }>Tähän et tarvitse bussia!</Typography>
                     )
                 }
                 {

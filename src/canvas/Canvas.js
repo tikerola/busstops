@@ -1,6 +1,6 @@
 /* eslint-disable no-loop-func */
 import React from 'react'
-import canvasData from './canvasData'
+import canvasData, { stops } from './canvasData'
 import isBusStopPressed from './isBusStopPressed'
 
 
@@ -61,6 +61,8 @@ class Canvas extends React.Component {
 
         ctx.drawImage(this.backgroundImageRef.current, 0, 0)
 
+        this.drawStartAndEndCircles(ctx, path[0].vertex, path[path.length - 1].vertex)
+
         // Animoidaan 'bussin' eteneminen kartalla
         await this.animateBus(ctx)
 
@@ -108,6 +110,7 @@ class Canvas extends React.Component {
     }
 
     drawAnimatedLine = (ctx, v1, v2, color) => {
+
         ctx.beginPath();
         ctx.lineWidth = 4
         ctx.strokeStyle = color
@@ -128,12 +131,32 @@ class Canvas extends React.Component {
                 ctx.moveTo(prevStartX, prevStartY);
                 ctx.lineTo(prevStartX + deltaX, prevStartY + deltaY);
                 ctx.stroke();
-
+                
                 ctx.drawImage(this.busRef.current, prevStartX + BUS_DIMENSIONS_X, prevStartY + BUS_DIMENSIONS_Y)
+                
                 prevStartX = prevStartX + deltaX
                 prevStartY = prevStartY + deltaY
             }, 2)
         }
+    }
+
+    drawStartAndEndCircles(ctx, vertex1, vertex2) {
+
+        const routeStart = vertex1
+        const routeEnd = vertex2
+
+        const [startX, startY] = stops[routeStart].point
+        const [endX, endY] = stops[routeEnd].point
+
+
+        ctx.beginPath();
+        ctx.lineWidth = 4
+        ctx.strokeStyle = 'red'
+        ctx.arc(startX, startY, 11, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(endX, endY, 11, 0, 2 * Math.PI);
+        ctx.stroke();
     }
 
     handleMouseDown = e => {
