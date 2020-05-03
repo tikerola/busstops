@@ -1,5 +1,5 @@
 
-const canvasData = {
+export default {
     'A':
     {
         point: [97, 198]

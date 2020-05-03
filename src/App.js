@@ -43,6 +43,7 @@ const styles = {
 function App() {
   const [data, setData] = React.useState({})
   const [drawBusses, setDrawBusses] = React.useState(false)
+  //const [path, setPath] = React.useState()
 
   return (
     <ThemeProvider theme={theme}>
@@ -53,7 +54,7 @@ function App() {
           <img src='./assets/images/poorman.png' alt="poorman" height="100" />
         </div>
         <Paper elevation={4} style={styles.content}>
-          <UI setData={setData} drawBusses={drawBusses} />
+          <UI setData={setData} path={data.pathWithColor} drawBusses={drawBusses} />
           <Canvas path={data.pathWithColor} setDrawBusses={setDrawBusses} />
         </Paper>
       </div>

@@ -1,7 +1,7 @@
 import { FormControl, InputLabel, Paper, Select, Typography } from '@material-ui/core'
 import { withTheme } from '@material-ui/core/styles'
 import React, { useEffect } from 'react'
-import data from '../data/data.json'
+import data from '../challengeData/data.json'
 import graph from '../routes/model'
 
 const containerStyles = {
@@ -16,7 +16,7 @@ const containerStyles = {
     color: '#999'
 }
 
-const UI = ({ setData, drawBusses }) => {
+const UI = ({ setData, drawBusses, path }) => {
 
     const [state, setState] = React.useState({
         start: '',
@@ -24,7 +24,7 @@ const UI = ({ setData, drawBusses }) => {
     });
 
     const [distance, setDistance] = React.useState()
-    const [path, setPath] = React.useState()
+    
 
     let selectRef1 = React.useRef()
     let selectRef2 = React.useRef()
@@ -34,7 +34,7 @@ const UI = ({ setData, drawBusses }) => {
             const data = graph.shortestPath(state.start, state.stop)
 
             setDistance(data.distance)
-            setPath(data.pathWithColor)
+            
             setData(data)
             setState({ start: '', stop: '' })
 

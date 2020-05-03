@@ -1,11 +1,19 @@
 /* eslint-disable no-loop-func */
 import React from 'react'
 import canvasData from './canvasData'
+import graph from '../routes/model'
+import isBusStopPressed from './isBusStopPressed'
+
 
 const BUS_DIMENSIONS_X = - 20
 const BUS_DIMENSIONS_Y = - 58
 
 class Canvas extends React.Component {
+
+    state = {
+        start: '',
+        stop: ''
+    }
 
     canvasRef = React.createRef()
     backgroundImageRef = React.createRef()
@@ -14,6 +22,7 @@ class Canvas extends React.Component {
     componentDidMount() {
 
         const canvas = this.canvasRef.current
+
         const ctx = canvas.getContext("2d")
 
         const background = new Image()
@@ -40,10 +49,10 @@ class Canvas extends React.Component {
         const ctx = canvas.getContext("2d")
 
         ctx.drawImage(this.backgroundImageRef.current, 0, 0)
-        
+
         // Animoidaan 'bussin' eteneminen kartalla
         await this.animateBus(ctx)
-        
+
         // Lopuksi piirretään kartalle yhtenäinen reittiviiva
         setTimeout(() => {
             for (let i = 0; i < path.length - 2; i++) {
@@ -51,11 +60,11 @@ class Canvas extends React.Component {
             }
             const x = `${path[path.length - 2].vertex}${path[path.length - 1].vertex}`
             const y = `${path[path.length - 2].vertex}${path[path.length - 1].vertex}`
-            
+
             const endpointX = canvasData[x].end[0]
             const endpointY = canvasData[y].end[1]
             ctx.drawImage(this.busRef.current, endpointX + BUS_DIMENSIONS_X, endpointY + BUS_DIMENSIONS_Y)
-            
+
             // Piirtämisen jälkeen annetaan UI:lle lupa näyttää reittitiedot väribusseineen
             this.props.setDrawBusses(true)
         }, 500)
@@ -91,7 +100,7 @@ class Canvas extends React.Component {
         ctx.lineWidth = 4
         ctx.strokeStyle = color
         let index = `${v1}${v2}`
-        
+
         let animCounter = 500
 
         const deltaX = (canvasData[index].end[0] - canvasData[index].start[0]) / animCounter
@@ -115,10 +124,19 @@ class Canvas extends React.Component {
         }
     }
 
+    handleMouseDown = e => {
+        console.log(e.clientX, e.clientY)
+        
+        const x = e.clientX - this.canvasRef.current.getBoundingClientRect().left
+        const y = e.clientY - this.canvasRef.current.getBoundingClientRect().top
+
+        console.log(isBusStopPressed(x, y))
+    }
+
     render() {
         return (
             <div style={{ overflow: 'hidden', borderRadius: '4px', height: '445px' }}>
-                <canvas ref={this.canvasRef} width={500} height={450} />
+                <canvas ref={this.canvasRef} width={500} height={450} onMouseDown={this.handleMouseDown} />
             </div>
         )
     }
