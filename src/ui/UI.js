@@ -16,49 +16,26 @@ const containerStyles = {
     color: '#999'
 }
 
-const UI = ({ setData, drawBusses, path, distance }) => {
-
-    const [state, setState] = React.useState({
-        start: '',
-        stop: '',
-    });
-
-    //const [distance, setDistance] = React.useState()
-    
+const UI = ({ drawBusses, path, distance, stop, setStop }) => {
 
     let selectRef1 = React.useRef()
     let selectRef2 = React.useRef()
 
-    // useEffect(() => {
-    //     setDistance(path.distance)
-    // }, [path])
-
     useEffect(() => {
-        if (state.start && state.stop) {
-            const data = graph.shortestPath(state.start, state.stop)
-
-            //setDistance(data.distance)
-            
-            setData(data)
-            setState({ start: '', stop: '' })
-
+        if (!stop.start && !stop.stop) {
+                selectRef1.current.blur()
+                selectRef2.current.blur()
         }
-    }, [state.start, state.stop, setData])
+    }, [stop.start, stop.stop])
 
-    useEffect(() => {
-        if (!state.start && !state.end) {
-            selectRef1.current.blur()
-            selectRef2.current.blur()
-        }
-    }, [state.start, state.end])
 
     const handleChange = (event) => {
 
         const name = event.target.name;
-        setState({
-            ...state,
+        setStop(prevState => ({
+            ...prevState,
             [name]: event.target.value,
-        });
+        }));
     };
 
 
@@ -66,16 +43,16 @@ const UI = ({ setData, drawBusses, path, distance }) => {
         <Paper style={containerStyles} elevation={8}>
             <div>
                 <FormControl >
-                    <InputLabel htmlFor="age-native-simple">Lähtöpysäkki</InputLabel>
+                    <InputLabel htmlFor="lähtöpysäkki">Lähtöpysäkki</InputLabel>
                     <Select
                         native
                         inputRef={selectRef2}
-                        value={state.start}
+                        value={stop.start}
                         onChange={handleChange}
                         style={{ width: '200px' }}
                         inputProps={{
                             name: 'start',
-                            id: 'age-native-simple'
+                            id: 'lähtöpysäkki'
                         }}
                     >
                         <option aria-label="None" value="" />
@@ -90,7 +67,7 @@ const UI = ({ setData, drawBusses, path, distance }) => {
                 <InputLabel htmlFor="päätepysäkki">Päätepysäkki</InputLabel>
                 <Select
                     native
-                    value={state.stop}
+                    value={stop.stop}
                     inputRef={selectRef1}
                     onChange={handleChange}
                     style={{ width: '200px' }}
@@ -106,7 +83,7 @@ const UI = ({ setData, drawBusses, path, distance }) => {
                 </Select>
             </FormControl>
             <div style={{ marginTop: '30px' }}>
-                {distance && distance !== Infinity && (
+                {distance > 0 && distance !== Infinity && (
                     <div>
                         <Typography style={{ marginBottom: '15px' }}>Reitti: {path[0].vertex} - {path[path.length - 1].vertex}, Lyhin matka: {distance}</Typography>
                         {path.map((point, index) => {
@@ -121,6 +98,11 @@ const UI = ({ setData, drawBusses, path, distance }) => {
 
                     </div>
                 )
+                }
+                {
+                    distance === 0 && (
+                        <Typography>Tähän et tarvitse bussia!</Typography>
+                    )
                 }
                 {
                     distance === Infinity && (

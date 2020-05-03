@@ -1,7 +1,6 @@
 /* eslint-disable no-loop-func */
 import React from 'react'
 import canvasData from './canvasData'
-import graph from '../routes/model'
 import isBusStopPressed from './isBusStopPressed'
 
 
@@ -9,11 +8,6 @@ const BUS_DIMENSIONS_X = - 20
 const BUS_DIMENSIONS_Y = - 58
 
 class Canvas extends React.Component {
-
-    state = {
-        start: '',
-        stop: ''
-    }
 
     canvasRef = React.createRef()
     backgroundImageRef = React.createRef()
@@ -39,20 +33,15 @@ class Canvas extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.start === '' && this.state.stop === '') {
+    
+        if (this.props.path !== prevProps.path && this.props.stop.start && this.props.stop.stop) {
+            
             this.animate()
             this.props.setDrawBusses(false)
-        }
-        else {
-            if(this.state.start && this.state.stop) {
-                
-                const data = graph.shortestPath(this.state.start, this.state.stop)
-                this.props.setData(data)
-                this.setState({
-                    start: '',
-                    stop: ''
-                })
-            }
+
+            setTimeout(() => {
+                this.props.setStop({ start: '', stop: '' })
+            }, 2000)
         }
     }
 
@@ -80,6 +69,7 @@ class Canvas extends React.Component {
 
             // Piirtämisen jälkeen annetaan UI:lle lupa näyttää reittitiedot väribusseineen
             this.props.setDrawBusses(true)
+            console.log(this.props.stop,'this.props.stop')
         }, 500)
     }
 
@@ -144,14 +134,12 @@ class Canvas extends React.Component {
 
         const letter = isBusStopPressed(x, y)
         if (letter) {
-            if (!this.state.start)
-                this.setState({
-                    start: letter
-                })
-            else if (!this.state.stop)
-                this.setState({
-                    stop: letter
-                })
+            if (!this.props.stop.start) {
+                this.props.setStop({ start: letter, stop: '' })
+            }
+            else if (!this.props.stop.stop) {
+                this.props.setStop(prevState => ({ ...prevState, stop: letter }))
+            }
         }
     }
 
