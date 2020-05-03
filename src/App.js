@@ -4,7 +4,7 @@ import UI from './ui/UI'
 import { Paper } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from './ui/theme'
-import graph from './routes/model'
+import graph from './routes/weightedGraph'
 
 const styles = {
   root: {
@@ -30,14 +30,16 @@ const styles = {
     width: '55%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginTop: '20px'
   },
 
   header: {
-    color: 'green',
+    color: '#663826',
     fontSize: '2.5em',
     letterSpacing: '0.1em',
-    fontFamily: 'Bigelow Rules, cursive'
+    fontFamily: 'Bigelow Rules, cursive',
+    marginBottom: 0
   }
 }
 
@@ -49,19 +51,23 @@ function App() {
   useEffect(() => {
     if (stop.start && stop.stop) {
       const data = graph.shortestPath(stop.start, stop.stop)
-      console.log(data, 'fuck')
+
       setData(data)
-      
     }
   }, [stop.start, stop.stop])
 
   return (
     <ThemeProvider theme={theme}>
       <div style={styles.root}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
         <div style={styles.headerContainer}>
-          <img src='./assets/images/poorman2.png' alt="poorman" height="100" />
+          <img src='./assets/images/poorman2.png' alt="poorman" height="80" />
           <h1 style={styles.header}>Köyhän miehen reittiopas</h1>
-          <img src='./assets/images/poorman.png' alt="poorman" height="100" />
+          <img src='./assets/images/poorman.png' alt="poorman" height="80" style={{ display: 'flex', alignSelf: 'bottom'}} />
+        </div>
+        <div style={{ color: '#777', fontSize: '0.8em', position: 'relative', top: '-10px'}}>
+        Valitse pysäkit valikosta tai kartalta
+        </div>
         </div>
 
         <Paper elevation={4} style={styles.content}>
@@ -72,6 +78,7 @@ function App() {
             distance={data.distance}
             stop={stop}
           />
+          
           <Canvas
             path={data.pathWithColor}
             setDrawBusses={setDrawBusses}

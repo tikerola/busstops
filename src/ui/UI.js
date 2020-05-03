@@ -2,7 +2,6 @@ import { FormControl, InputLabel, Paper, Select, Typography } from '@material-ui
 import { withTheme } from '@material-ui/core/styles'
 import React, { useEffect } from 'react'
 import data from '../challengeData/data.json'
-import graph from '../routes/model'
 
 const containerStyles = {
     display: 'flex',
@@ -109,6 +108,7 @@ const UI = ({ drawBusses, path, distance, stop, setStop }) => {
                         <Typography style={{ color: 'red' }}>Linjat eivät valitettavasti vie sinua perille</Typography>
                     )
                 }
+                
             </div>
         </Paper>
     )
