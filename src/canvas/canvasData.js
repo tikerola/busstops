@@ -149,7 +149,7 @@ const canvasData = {
     },
     'OP': {
         start: [485, 36],
-        end: [379, 78]
+        end: [379, 79]
     },
     'PQ': {
         start: [379, 87],
@@ -249,7 +249,7 @@ const canvasData = {
     },
     'PO': {
         end: [485, 36],
-        start: [379, 78]
+        start: [379, 79]
     },
     'QP': {
         end: [379, 87],
