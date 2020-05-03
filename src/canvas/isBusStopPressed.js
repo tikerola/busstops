@@ -79,4 +79,6 @@ export default (x, y) => {
     else if (x >= vertices['R'].point[0] - RADIUS && x <= vertices['R'].point[0] + RADIUS &&
         y >= vertices['R'].point[1] - RADIUS && y <= vertices['R'].point[1] + RADIUS)
         return 'R'
+
+    return undefined
 }

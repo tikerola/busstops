@@ -16,24 +16,28 @@ const containerStyles = {
     color: '#999'
 }
 
-const UI = ({ setData, drawBusses, path }) => {
+const UI = ({ setData, drawBusses, path, distance }) => {
 
     const [state, setState] = React.useState({
         start: '',
         stop: '',
     });
 
-    const [distance, setDistance] = React.useState()
+    //const [distance, setDistance] = React.useState()
     
 
     let selectRef1 = React.useRef()
     let selectRef2 = React.useRef()
 
+    // useEffect(() => {
+    //     setDistance(path.distance)
+    // }, [path])
+
     useEffect(() => {
         if (state.start && state.stop) {
             const data = graph.shortestPath(state.start, state.stop)
 
-            setDistance(data.distance)
+            //setDistance(data.distance)
             
             setData(data)
             setState({ start: '', stop: '' })

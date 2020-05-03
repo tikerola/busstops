@@ -54,8 +54,8 @@ function App() {
           <img src='./assets/images/poorman.png' alt="poorman" height="100" />
         </div>
         <Paper elevation={4} style={styles.content}>
-          <UI setData={setData} path={data.pathWithColor} drawBusses={drawBusses} />
-          <Canvas path={data.pathWithColor} setDrawBusses={setDrawBusses} />
+          <UI setData={setData} path={data.pathWithColor} drawBusses={drawBusses} distance={data.distance} />
+          <Canvas path={data.pathWithColor} setDrawBusses={setDrawBusses} setData={setData}/>
         </Paper>
       </div>
     </ThemeProvider>

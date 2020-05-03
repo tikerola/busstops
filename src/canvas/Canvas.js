@@ -39,8 +39,21 @@ class Canvas extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        this.animate()
-        this.props.setDrawBusses(false)
+        if (this.state.start === '' && this.state.stop === '') {
+            this.animate()
+            this.props.setDrawBusses(false)
+        }
+        else {
+            if(this.state.start && this.state.stop) {
+                
+                const data = graph.shortestPath(this.state.start, this.state.stop)
+                this.props.setData(data)
+                this.setState({
+                    start: '',
+                    stop: ''
+                })
+            }
+        }
     }
 
     async animate() {
@@ -125,12 +138,21 @@ class Canvas extends React.Component {
     }
 
     handleMouseDown = e => {
-        console.log(e.clientX, e.clientY)
-        
+
         const x = e.clientX - this.canvasRef.current.getBoundingClientRect().left
         const y = e.clientY - this.canvasRef.current.getBoundingClientRect().top
 
-        console.log(isBusStopPressed(x, y))
+        const letter = isBusStopPressed(x, y)
+        if (letter) {
+            if (!this.state.start)
+                this.setState({
+                    start: letter
+                })
+            else if (!this.state.stop)
+                this.setState({
+                    stop: letter
+                })
+        }
     }
 
     render() {
