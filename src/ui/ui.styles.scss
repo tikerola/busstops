@@ -1,0 +1,114 @@
+.ui-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #38423d;
+  padding: 20px;
+  height: 400px;
+  width: 220px;
+  margin-right: 5em;
+  color: #999;
+}
+
+.ui-selects {
+  display: flex;
+  flex-direction: column;
+}
+
+.ui-selectContainer {
+  display: flex;
+  direction: row;
+  align-items: flex-end;
+}
+
+.ui-selectInput {
+  min-width: 170px;
+}
+
+.ui-busIcon {
+  margin-right: 5px;
+  padding-bottom: 4px;
+  color: #999;
+}
+
+.ui-resultContainer {
+  margin-top: 30px;
+  background: #5c3835;
+  padding: 10px;
+  width: 90%;
+  height: 65%;
+  color: #999;
+}
+
+.ui-resultTitle {
+  text-align: center;
+  font-size: 1.0em;
+  text-decoration: underline;
+  margin-bottom: 10px;
+  color: #999;
+}
+
+.ui-resultRoute {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #999;
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+.ui-resultRouteList {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.ui-resultVertex {
+  width: 100px;
+  color: #999;
+}
+
+.ui-loading {
+  color: #999;
+  text-align: center;
+}
+
+@media screen and (max-height: 600px) {
+
+  .ui-container {
+    width: 450px;
+    height: 200px;
+  }
+
+  .ui-selects {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .ui-selectContainer:last-child {
+    padding-left: 20px;
+  }
+
+  .ui-resultRouteListContainer {
+    display: inline-block;
+    margin-right: 12px;
+  }
+
+  .ui-resultRouteList {
+    display: flex;
+    flex-direction: column;
+    width: 30px;
+    font-size: 0.8em;
+  }
+
+  .ui-resultVertex {
+    width: 35px;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .ui-container {
+    margin-right: 0;
+  }
+}

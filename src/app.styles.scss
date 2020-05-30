@@ -1,0 +1,105 @@
+.app-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  background: black;
+}
+
+.app-headerAndSubheaderContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.app-headerContainer {
+  width: 55%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.app-header {
+  color: #663826;
+  font-size: 2em;
+  letter-spacing: 0.1em;
+  font-family: "Bigelow Rules", cursive;
+  padding-left: 0.5em;
+}
+
+@mixin subheader {
+  color: #777;
+  font-size: 0.8em;
+  position: relative;
+  top: -25px;
+}
+
+.app-subheader-lg {
+  @include subheader;
+}
+
+.app-subheader-md {
+  @include subheader;
+  display: none;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 30px;
+  width: 80%;
+  background: radial-gradient(circle, rgba(69, 69, 71, 1) 0%, rgba(3, 5, 13, 1) 91%, rgba(0, 0, 0, 1) 100%);
+}
+
+@media screen and (max-width: 800px) {
+  .app-headerContainer {
+    width: 80%;
+  }
+
+  .app-subheader-lg {
+    display: none;
+  }
+
+  .app-subheader-md {
+    display: inline;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .app-headerContainer {
+    width: 98%;
+  }
+}
+
+@media screen and (max-height: 600px) {
+
+  .app-headerContainer {
+    margin-top: 5px;
+  }
+
+  .app-subheader-lg {
+    display: none;
+  }
+
+  .app-content {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .app-header {
+    font-size: 1.5em;
+  }
+}
+
+@media screen and (max-width: 359px) {
+  .app-header {
+    font-size: 1em;
+  }
+}

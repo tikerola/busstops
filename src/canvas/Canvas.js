@@ -2,19 +2,11 @@
 import React from 'react'
 import canvasData, { stops } from './canvasData'
 import isBusStopPressed from './isBusStopPressed'
-
+import './Canvas.styles.scss'
 
 const BUS_DIMENSIONS_X = - 20
 const BUS_DIMENSIONS_Y = - 55
 
-const styles = {
-    canvas: {
-        overflow: 'hidden',
-        borderRadius: '4px',
-        height: '445px',
-        cursor: 'pointer'
-    }
-}
 
 class Canvas extends React.Component {
 
@@ -131,9 +123,9 @@ class Canvas extends React.Component {
                 ctx.moveTo(prevStartX, prevStartY);
                 ctx.lineTo(prevStartX + deltaX, prevStartY + deltaY);
                 ctx.stroke();
-                
+
                 ctx.drawImage(this.busRef.current, prevStartX + BUS_DIMENSIONS_X, prevStartY + BUS_DIMENSIONS_Y)
-                
+
                 prevStartX = prevStartX + deltaX
                 prevStartY = prevStartY + deltaY
             }, 2)
@@ -177,13 +169,15 @@ class Canvas extends React.Component {
 
     render() {
         return (
-            <div style={styles.canvas}>
+            <div className="canvas-container">
                 <canvas
+                    id="canvas"
                     ref={this.canvasRef}
                     width={500} height={450}
                     onMouseDown={this.handleMouseDown}
                 />
             </div>
+
         )
     }
 }

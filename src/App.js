@@ -5,50 +5,8 @@ import { Paper } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/core/styles'
 import theme from './ui/theme'
 import initGraph from './routes/initGraph'
+import './app.styles.scss'
 
-const styles = {
-  container: {
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    overflow: 'hidden',
-    background: 'black'
-  },
-
-  headerAndSubheaderContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '100%'
-  },
-
-  headerContainer: {
-    width: '55%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: '20px'
-  },
-
-  header: {
-    color: '#663826',
-    fontSize: '2.5em',
-    letterSpacing: '0.1em',
-    fontFamily: 'Bigelow Rules, cursive',
-    marginBottom: 0
-  },
-
-  content: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    padding: '30px',
-    width: '80vw',
-    background: 'radial-gradient(circle, rgba(69,69,71,1) 0%, rgba(3,5,13,1) 91%, rgba(0,0,0,1) 100%)'
-  }
-}
 
 function App() {
   const [data, setData] = React.useState({})
@@ -71,19 +29,22 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <div style={styles.container}>
-        <div style={styles.headerAndSubheaderContainer}>
-          <div style={styles.headerContainer}>
+      <div className="app-container">
+        <div className="app-headerAndSubheaderContainer">
+          <div className="app-headerContainer">
             <img src='./assets/images/poorman2.png' alt="poorman" height="80" />
-            <h1 style={styles.header}>Köyhän miehen reittiopas</h1>
+            <h1 className="app-header">Köyhän miehen reittiopas</h1>
             <img src='./assets/images/poorman.png' alt="poorman" height="80" />
           </div>
-          <div style={{ color: '#777', fontSize: '0.8em', position: 'relative', top: '-10px' }}>
+          <div className="app-subheader-lg">
             Valitse pysäkit valikosta tai kartalta
+          </div>
+          <div className="app-subheader-md">
+            Valitse pysäkit valikosta
           </div>
         </div>
 
-        <Paper elevation={4} style={styles.content}>
+        <Paper elevation={4} className="app-content">
           <UI
             setBusStop={setBusStop}
             path={data.pathWithColor}
@@ -91,14 +52,15 @@ function App() {
             distance={data.distance}
             busStop={busStop}
           />
-
-          <Canvas
-            path={data.pathWithColor}
-            setDrawBusses={setDrawBusses}
-            setData={setData}
-            setBusStop={setBusStop}
-            busStop={busStop}
-          />
+          <div className="canvas">
+            <Canvas
+              path={data.pathWithColor}
+              setDrawBusses={setDrawBusses}
+              setData={setData}
+              setBusStop={setBusStop}
+              busStop={busStop}
+            />
+          </div>
         </Paper>
 
       </div>
