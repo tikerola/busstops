@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/busstops/static/css/main.c25fe292.chunk.css",
+    "main.css": "/busstops/static/css/main.0793284e.chunk.css",
     "main.js": "/busstops/static/js/main.47a65d82.chunk.js",
     "main.js.map": "/busstops/static/js/main.47a65d82.chunk.js.map",
     "runtime-main.js": "/busstops/static/js/runtime-main.c5263070.js",
@@ -8,15 +8,15 @@
     "static/js/2.b1c99171.chunk.js": "/busstops/static/js/2.b1c99171.chunk.js",
     "static/js/2.b1c99171.chunk.js.map": "/busstops/static/js/2.b1c99171.chunk.js.map",
     "index.html": "/busstops/index.html",
-    "precache-manifest.afccc809ee6afe149e97cc8e41979305.js": "/busstops/precache-manifest.afccc809ee6afe149e97cc8e41979305.js",
+    "precache-manifest.187c2da36f08bb2003a7e22f147ad8be.js": "/busstops/precache-manifest.187c2da36f08bb2003a7e22f147ad8be.js",
     "service-worker.js": "/busstops/service-worker.js",
-    "static/css/main.c25fe292.chunk.css.map": "/busstops/static/css/main.c25fe292.chunk.css.map",
+    "static/css/main.0793284e.chunk.css.map": "/busstops/static/css/main.0793284e.chunk.css.map",
     "static/js/2.b1c99171.chunk.js.LICENSE.txt": "/busstops/static/js/2.b1c99171.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c5263070.js",
     "static/js/2.b1c99171.chunk.js",
-    "static/css/main.c25fe292.chunk.css",
+    "static/css/main.0793284e.chunk.css",
     "static/js/main.47a65d82.chunk.js"
   ]
 }
